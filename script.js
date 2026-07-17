@@ -48,14 +48,29 @@ if (!admin) {
 // Form Switching
 // ===============================
 
+function showForm(form) {
+    if (form === "login") {
+        signupForm.style.display = "none";
+        loginForm.style.display = "flex";
+    } else {
+        signupForm.style.display = "flex";
+        loginForm.style.display = "none";
+    }
+}
+
+const params = new URLSearchParams(window.location.search);
+if (params.get("form") === "login") {
+    showForm("login");
+} else {
+    showForm("signup");
+}
+
 document.querySelector(".have-account").addEventListener("click", () => {
-    signupForm.style.display = "none";
-    loginForm.style.display = "flex";
+    showForm("login");
 });
 
 document.querySelector(".dont-have-account").addEventListener("click", () => {
-    signupForm.style.display = "flex";
-    loginForm.style.display = "none";
+    showForm("signup");
 });
 
 // ===============================
