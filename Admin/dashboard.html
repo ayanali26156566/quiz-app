@@ -1,386 +1,1171 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
+
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>EduPanel - Admin Dashboard</title>
+
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <title>EduPanel | Admin Dashboard</title>
+
         <script
             src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+        <link rel="preconnect"
+            href="https://fonts.googleapis.com">
+
+        <link rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin>
+
         <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
             rel="stylesheet">
+
         <script src="https://unpkg.com/lucide@latest"></script>
 
-        <style>
-        body {
-            background-color: #0f172a;
-            color: #f1f5f9;
-        }
-        /* Custom glow effect matching your shadow #2777e6 */
-        .glow-card {
-            border: 1px solid rgba(26, 79, 163, 0.4);
-            box-shadow: 0 4px 20px -2px rgba(39, 119, 230, 0.15);
-            background-color: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-        }
-        .sidebar-active {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0) 100%);
-            border-left: 4px solid #3b82f6;
-        }
-        /* Mobile Sidebar Transition */
-        #mobile-sidebar {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.45s ease, visibility 0.45s ease;
-        }
-        #mobile-sidebar.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        #sidebar-backdrop {
-            transition: opacity 0.45s ease;
-        }
-    </style>
     </head>
-    <body class="font-sans antialiased min-h-screen flex">
 
-        <aside
-            class="w-64 border-r border-[rgba(26,79,163,0.4)] hidden lg:flex flex-col justify-between p-6 bg-[#090d16] shrink-0">
-            <div>
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="bg-blue-600 p-2 rounded-xl text-white">
-                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-lg leading-none">EduPanel</h1>
-                        <span class="text-xs text-gray-400">Admin Panel</span>
-                    </div>
-                </div>
+    <body class="bg-slate-950 text-white font-[Inter]">
 
-                <nav class="space-y-1">
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-white sidebar-active">
-                        <i data-lucide="layout-dashboard"
-                            class="w-5 h-5 text-[#3b82f6]"></i>
-                        <span class="font-medium text-sm">Dashboard</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-slate-800/50 transition cursor-pointer">
-                        <i data-lucide="users" class="w-5 h-5"></i>
-                        <span class="text-sm">Students</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-slate-800/50 transition cursor-pointer">
-                        <i data-lucide="book-open" class="w-5 h-5"></i>
-                        <span class="text-sm">Courses</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-slate-800/50 transition cursor-pointer">
-                        <i data-lucide="help-circle" class="w-5 h-5"></i>
-                        <span class="text-sm">Quizzes</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-slate-800/50 transition">
-                        <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
-                        <span class="text-sm">Results</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-slate-800/50 transition justify-between">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                            <span class="text-sm">Messages</span>
-                        </div>
-                        <span
-                            class="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full">5</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-slate-800/50 transition">
-                        <i data-lucide="file-text" class="w-5 h-5"></i>
-                        <span class="text-sm">Reports</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-slate-800/50 transition">
-                        <i data-lucide="settings" class="w-5 h-5"></i>
-                        <span class="text-sm">Settings</span>
-                    </a>
-                </nav>
-            </div>
+        <div class="flex min-h-screen">
 
-            <div class="space-y-4">
-                <div
-                    class="p-4 rounded-xl border border-[rgba(26,79,163,0.3)] bg-slate-900/40 flex items-center gap-3">
-                    <div class="relative">
-                        <img
-                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-                            alt="Admin"
-                            class="w-10 h-10 rounded-full object-cover">
-                        <span
-                            class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#090d16] rounded-full"></span>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-sm">Admin</h4>
-                        <span class="text-xs text-gray-400">Super Admin</span>
-                    </div>
-                </div>
-                <a href="../index.html?form=login"
-                    class="flex items-center text-inherit gap-3 px-4 py-3 cursor-pointer w-full text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition">
-                    <i data-lucide="log-out" class="w-5 h-5"></i>
-                    <span class="text-sm ">Logout</span>
-                </a>
-
-            </div>
-        </aside>
-
-        <div id="mobile-sidebar" class="fixed inset-0 z-50 flex">
-            <div id="sidebar-backdrop"
-                class="fixed inset-0 bg-black/60 backdrop-blur-sm"></div>
+            <!-- ===========================
+             Desktop Sidebar
+        ============================ -->
 
             <aside
-                class="relative w-64 bg-[#090d16] border-r border-[rgba(26,79,163,0.4)] h-full p-6 flex flex-col justify-between z-10">
-                <button id="close-sidebar-btn"
-                    class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
+                class="hidden lg:flex w-64 shrink-0 flex-col justify-between bg-[#090d16] border-r border-blue-500/20 p-6">
+
+                <!-- Top -->
 
                 <div>
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="bg-blue-600 p-2 rounded-xl text-white">
-                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+
+                    <!-- Logo -->
+
+                    <div class="flex items-center gap-3 mb-10">
+
+                        <div
+                            class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/40">
+
+                            <i data-lucide="graduation-cap"
+                                class="w-7 h-7 text-white"></i>
+
                         </div>
+
                         <div>
-                            <h1
-                                class="font-bold text-lg leading-none">EduPanel</h1>
-                            <span class="text-xs text-gray-400">Admin
-                                Panel</span>
+
+                            <h1 class="text-xl font-bold">
+
+                                EduPanel
+
+                            </h1>
+
+                            <p class="text-xs text-slate-400">
+
+                                Admin Dashboard
+
+                            </p>
+
                         </div>
+
                     </div>
 
-                    <nav class="space-y-1">
+                    <!-- Navigation -->
+
+                    <nav class="space-y-2">
+
+                        <!-- Dashboard -->
+
                         <a href="#"
-                            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white sidebar-active">
+                            data-section="dashboard-section"
+                            class="sidebar-link sidebar-active flex items-center gap-3 rounded-xl px-4 py-3 bg-blue-600/15 border-l-4 border-blue-500 shadow-lg shadow-blue-500/20">
+
                             <i data-lucide="layout-dashboard"
-                                class="w-5 h-5 text-[#3b82f6]"></i>
-                            <span class="font-medium text-sm">Dashboard</span>
+                                class="w-5 h-5 text-blue-400"></i>
+
+                            <span class="font-medium">
+
+                                Dashboard
+
+                            </span>
+
                         </a>
+
+                        <!-- Students -->
+
                         <a href="#"
-                            class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white">
-                            <i data-lucide="users" class="w-5 h-5"></i>
-                            <span class="text-sm">Students</span>
+                            data-section="students-section"
+                            class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                            <i data-lucide="users"
+                                class="w-5 h-5"></i>
+
+                            <span>
+
+                                Students
+
+                            </span>
+
                         </a>
+
+                        <!-- Quizzes -->
+
                         <a href="#"
-                            class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white">
-                            <i data-lucide="book-open" class="w-5 h-5"></i>
-                            <span class="text-sm">Courses</span>
+                            data-section="quizzes-section"
+                            class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                            <i data-lucide="help-circle"
+                                class="w-5 h-5"></i>
+
+                            <span>
+
+                                Quizzes
+
+                            </span>
+
                         </a>
+
+                        <!-- Results -->
+
                         <a href="#"
-                            class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white">
-                            <i data-lucide="help-circle" class="w-5 h-5"></i>
-                            <span class="text-sm">Quizzes</span>
+                            data-section="results-section"
+                            class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                            <i data-lucide="bar-chart-2"
+                                class="w-5 h-5"></i>
+
+                            <span>
+
+                                Results
+
+                            </span>
+
                         </a>
+
+                        <!-- Settings -->
+
+                        <a href="#"
+                            data-section="settings-section"
+                            class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                            <i data-lucide="settings"
+                                class="w-5 h-5"></i>
+
+                            <span>
+
+                                Settings
+
+                            </span>
+
+                        </a>
+
                     </nav>
+
                 </div>
+
+                <!-- Bottom -->
 
                 <div class="space-y-4">
+
+                    <!-- Logout -->
+
+                    <a href="../index.html?form=login"
+                        onclick="localStorage.removeItem('admin'); localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authRole');"
+                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-400 transition border border-transparent">
+
+                        <i data-lucide="log-out"
+                            class="w-5 h-5"></i>
+
+                        <span class="font-medium">
+
+                            Logout
+
+                        </span>
+
+                    </a>
+
+                    <!-- Admin -->
+
                     <div
-                        class="p-4 rounded-xl border border-[rgba(26,79,163,0.3)] bg-slate-900/40 flex items-center gap-3">
+                        class="flex items-center gap-3 rounded-xl border border-blue-500/20 bg-slate-900 p-4">
+
                         <img
                             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-                            alt="Admin"
-                            class="w-10 h-10 rounded-full object-cover">
+                            class="h-11 w-11 rounded-full object-cover">
+
                         <div>
-                            <h4 class="font-semibold text-sm">Admin</h4>
-                            <span class="text-xs text-gray-400">Super
-                                Admin</span>
+
+                            <h3 class="text-sm font-semibold">
+
+                                Admin
+
+                            </h3>
+
+                            <p class="text-xs text-slate-400">
+
+                                Super Admin
+
+                            </p>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </aside>
-        </div>
+            <!-- ===========================
+             Mobile Sidebar
+        ============================ -->
 
-        <main class="flex-1 p-4 md:p-8 overflow-y-auto space-y-8 w-full">
+            <div
+                id="mobile-sidebar"
+                class="fixed inset-0 z-50 hidden lg:hidden">
 
-            <header class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <button id="hamburger-btn"
-                        class="p-2.5 rounded-xl bg-slate-900/50 border border-[rgba(26,79,163,0.4)] text-gray-400 hover:text-white lg:hidden cursor-pointer">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                <!-- Backdrop -->
+
+                <div
+                    id="sidebar-backdrop"
+                    class="absolute inset-0 bg-black/70 backdrop-blur-sm">
+                </div>
+
+                <!-- Sidebar -->
+
+                <aside
+                    class="relative z-10 w-72 h-full bg-[#090d16] border-r border-blue-500/20 p-6 flex flex-col justify-between">
+
+                    <!-- Close -->
+
+                    <button
+                        id="close-sidebar-btn"
+                        class="absolute top-5 right-5 text-slate-400 hover:text-white transition cursor-pointer">
+
+                        <i
+                            data-lucide="x"
+                            class="w-6 h-6">
+                        </i>
+
                     </button>
-                    <h2 class="text-xl md:text-2xl font-bold">Dashboard</h2>
-                </div>
 
-                <div class="flex items-center gap-3 md:gap-4">
-                    <div class="relative hidden sm:block w-48 md:w-80">
-                        <i data-lucide="search"
-                            class="w-4 h-4 absolute left-3 top-3 text-gray-400"></i>
-                        <input type="text" placeholder="Search..."
-                            class="w-full pl-10 pr-4 py-2 bg-slate-900/50 border border-[rgba(26,79,163,0.4)] rounded-xl text-sm focus:outline-none">
-                    </div>
+                    <!-- Top -->
 
-                    <div class="relative inline-block cursor-pointer"
-                        id="notification">
+                    <div>
 
-                        <i data-lucide="bell"
-                            class=" text-gray-400 hover:text-white "></i>
+                        <!-- Logo -->
 
-                        <span id="notification-count"
-                            class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
-                        </span><div id="notification-area"
-                            class="hidden absolute right-0 mt-3 w-80 max-h-96 overflow-y-auto bg-[#0F172A] border border-[rgba(26,79,163,0.4)] rounded-xl shadow-[0_0_20px_#2777e6] p-4 z-50">
+                        <div class="flex items-center gap-3 mb-10">
+
+                            <div
+                                class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/40">
+
+                                <i
+                                    data-lucide="graduation-cap"
+                                    class="w-7 h-7 text-white">
+                                </i>
+
+                            </div>
+
+                            <div>
+
+                                <h2 class="text-xl font-bold">
+
+                                    EduPanel
+
+                                </h2>
+
+                                <p class="text-xs text-slate-400">
+
+                                    Admin Dashboard
+
+                                </p>
+
+                            </div>
 
                         </div>
 
+                        <!-- Navigation -->
+
+                        <nav class="space-y-2">
+
+                            <a href="#"
+                                data-section="dashboard-section"
+                                class="sidebar-link sidebar-active flex items-center gap-3 rounded-xl px-4 py-3 bg-blue-600/15 border-l-4 border-blue-500">
+
+                                <i
+                                    data-lucide="layout-dashboard"
+                                    class="w-5 h-5 text-blue-400">
+                                </i>
+
+                                <span>
+
+                                    Dashboard
+
+                                </span>
+
+                            </a>
+
+                            <a href="#"
+                                data-section="students-section"
+                                class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                                <i
+                                    data-lucide="users"
+                                    class="w-5 h-5">
+                                </i>
+
+                                <span>
+
+                                    Students
+
+                                </span>
+
+                            </a>
+
+                            <a href="#"
+                                data-section="quizzes-section"
+                                class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                                <i
+                                    data-lucide="help-circle"
+                                    class="w-5 h-5">
+                                </i>
+
+                                <span>
+
+                                    Quizzes
+
+                                </span>
+
+                            </a>
+
+                            <a href="#"
+                                data-section="results-section"
+                                class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                                <i
+                                    data-lucide="bar-chart-2"
+                                    class="w-5 h-5">
+                                </i>
+
+                                <span>
+
+                                    Results
+
+                                </span>
+
+                            </a>
+
+                            <a href="#"
+                                data-section="settings-section"
+                                class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white transition">
+
+                                <i
+                                    data-lucide="settings"
+                                    class="w-5 h-5">
+                                </i>
+
+                                <span>
+
+                                    Settings
+
+                                </span>
+
+                            </a>
+
+                        </nav>
+
                     </div>
+
+                    <!-- Bottom -->
+
                     <div
-                        class="flex items-center gap-3 pl-3 border-l border-slate-800">
-                        <img
-                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-                            alt="Admin"
-                            class="w-8 h-8 md:w-10 md:h-10 rounded-xl object-cover">
-                    </div>
-                </div>
-            </header>
+                        class="border-t border-slate-800 pt-5 space-y-4">
 
-            <section
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div
-                    class="glow-card p-6 rounded-2xl flex items-center justify-between">
-                    <div class="space-y-2">
-                        <span
-                            class="text-xs text-gray-400 uppercase font-semibold">Total
-                            Students</span>
-                        <h3 class="text-3xl font-bold">1,248</h3>
-                        <span
-                            class="text-xs text-green-400 flex items-center gap-1">+12.5%</span>
-                    </div>
-                    <div class="p-4 bg-blue-500/10 rounded-2xl text-blue-400">
-                        <i data-lucide="users" class="w-8 h-8"></i>
-                    </div>
-                </div>
-                <div
-                    class="glow-card p-6 rounded-2xl flex items-center justify-between">
-                    <div class="space-y-2">
-                        <span
-                            class="text-xs text-gray-400 uppercase font-semibold">Total
-                            Quizzes</span>
-                        <h3 class="text-3xl font-bold">86</h3>
-                        <span
-                            class="text-xs text-green-400 flex items-center gap-1">+8.3%</span>
-                    </div>
-                    <div class="p-4 bg-blue-500/10 rounded-2xl text-blue-400">
-                        <i data-lucide="help-circle" class="w-8 h-8"></i>
-                    </div>
-                </div>
-                <div
-                    class="glow-card p-6 rounded-2xl flex items-center justify-between">
-                    <div class="space-y-2">
-                        <span
-                            class="text-xs text-gray-400 uppercase font-semibold">Total
-                            Results</span>
-                        <h3 class="text-3xl font-bold">932</h3>
-                        <span
-                            class="text-xs text-green-400 flex items-center gap-1">+15.6%</span>
-                    </div>
-                    <div
-                        class="p-4 bg-emerald-500/10 rounded-2xl text-emerald-400">
-                        <i data-lucide="award" class="w-8 h-8"></i>
-                    </div>
-                </div>
-                <div
-                    class="glow-card p-6 rounded-2xl flex items-center justify-between">
-                    <div class="space-y-2">
-                        <span
-                            class="text-xs text-gray-400 uppercase font-semibold">Avg.
-                            Score</span>
-                        <h3 class="text-3xl font-bold">78.4%</h3>
-                        <span
-                            class="text-xs text-green-400 flex items-center gap-1">+4.7%</span>
-                    </div>
-                    <div class="p-4 bg-amber-500/10 rounded-2xl text-amber-400">
-                        <i data-lucide="trophy" class="w-8 h-8"></i>
-                    </div>
-                </div>
-            </section>
+                        <a href="../index.html?form=login"
+                            onclick="localStorage.removeItem('admin'); localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authRole');"
+                            class="flex items-center gap-3 rounded-xl px-4 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-400 transition border border-transparent">
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-8">
-                    <div class="glow-card rounded-2xl p-6">
-                        <div
-                            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                            <h3 class="text-lg font-bold">Students List</h3>
-                            <button
-                                class="bg-[#3b82f6] hover:bg-[#2563eb] text-white px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 justify-center transition">
-                                <i data-lucide="plus" class="w-4 h-4"></i> Add
-                                Student
-                            </button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm">
-                                <thead>
-                                    <tr
-                                        class="text-gray-400 border-b border-[rgba(26,79,163,0.2)]">
-                                        <th class="pb-3">Name</th>
-                                        <th class="pb-3">Email</th>
-                                        <th class="pb-3">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody
-                                    class="divide-y divide-[rgba(26,79,163,0.1)]">
-                                    <tr>
-                                        <td
-                                            class="py-4 flex items-center gap-3">
-                                            <img
-                                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80"
-                                                class="w-8 h-8 rounded-full object-cover">
-                                            <span class="font-medium">Ayan
-                                                Khan</span>
-                                        </td>
-                                        <td
-                                            class="py-4 text-gray-400">ayan@gmail.com</td>
-                                        <td
-                                            class="py-4 text-green-400">Active</td>
-                                    </tr>
-                                    <tr>
-                                        <td
-                                            class="py-4 flex items-center gap-3">
-                                            <img
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80"
-                                                class="w-8 h-8 rounded-full object-cover">
-                                            <span class="font-medium">Sara
-                                                Ali</span>
-                                        </td>
-                                        <td
-                                            class="py-4 text-gray-400">sara@gmail.com</td>
-                                        <td
-                                            class="py-4 text-green-400">Active</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                            <i
+                                data-lucide="log-out"
+                                class="w-5 h-5">
+                            </i>
 
-                <div class="glow-card rounded-2xl p-6 h-fit">
-                    <h3 class="text-lg font-bold mb-4">Students Overview</h3>
-                    <div class="flex flex-col gap-4">
-                        <div
-                            class="flex justify-between border-b border-slate-800 pb-2">
-                            <span>Active</span>
-                            <span class="text-emerald-400 font-bold">892</span>
+                            <span>
+
+                                Logout
+
+                            </span>
+
+                        </a>
+
+                        <div class="flex items-center gap-3">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                class="w-11 h-11 rounded-full object-cover">
+
+                            <div>
+
+                                <h3 class="font-semibold">
+
+                                    Admin
+
+                                </h3>
+
+                                <p class="text-xs text-slate-400">
+
+                                    Super Admin
+
+                                </p>
+
+                            </div>
+
                         </div>
-                        <div
-                            class="flex justify-between border-b border-slate-800 pb-2">
-                            <span>Inactive</span>
-                            <span class="text-rose-400 font-bold">156</span>
-                        </div>
+
                     </div>
-                </div>
+
+                </aside>
+
             </div>
 
-        </main>
+            <!-- ===========================
+             Main Content
+        ============================ -->
 
-        <script src="dashboard.js">
-       
+            <main class="flex-1 p-5 lg:p-8 overflow-y-auto">
 
-    </script>
-    </body>
-</html>
+                <!-- =====================================
+                Header
+====================================== -->
+
+                <header
+                    class="flex flex-wrap items-center justify-between gap-3 lg:gap-5 mb-8">
+
+                    <!-- Left -->
+
+                    <div class="flex items-center gap-4">
+
+                        <!-- Mobile Menu -->
+
+                        <button
+                            id="hamburger-btn"
+                            class="lg:hidden w-11 h-11 rounded-xl border border-blue-500/20 bg-slate-900 hover:bg-slate-800 flex items-center justify-center transition">
+
+                            <i
+                                data-lucide="menu"
+                                class="w-6 h-6">
+                            </i>
+
+                        </button>
+
+                        <div>
+
+                            <h1
+                                class="text-3xl font-bold">
+
+                                Dashboard
+
+                            </h1>
+
+                            <p
+                                class="text-sm text-slate-400 mt-1">
+
+                                Welcome Back, Admin 👋
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Right -->
+
+                    <div
+                        class="flex items-center gap-3 ml-auto shrink-0 min-w-0">
+
+                        <!-- Search -->
+
+                        <div
+                            class="relative hidden md:block">
+
+                            <i
+                                data-lucide="search"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500">
+                            </i>
+
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                class="w-72 bg-slate-900 border border-blue-500/20 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-blue-500 transition">
+
+                        </div>
+
+                        <!-- Notification -->
+
+                        <div
+                            id="notification"
+                            class="relative cursor-pointer">
+
+                            <button
+                                class="w-11 h-11 cursor-pointer  rounded-xl border border-blue-500/20 bg-slate-900 hover:bg-slate-800 flex items-center justify-center transition">
+
+                                <i
+                                    data-lucide="bell"
+                                    class="w-5 h-5 cursor-pointer">
+                                </i>
+
+                            </button>
+
+                            <!-- Badge -->
+
+                            <span
+                                id="notification-count"
+                                class="hidden absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] flex items-center justify-center font-semibold">
+                            </span>
+
+                            <!-- Notification Popup -->
+
+                            <div
+                                id="notification-area"
+                                class="hidden absolute right-0 mt-4 w-80 max-h-96 overflow-y-auto rounded-2xl border border-blue-500/20 bg-[#090d16] shadow-2xl p-4 z-50">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Profile -->
+
+                        <div
+                            class="flex items-center gap-3">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                class="w-11 h-11 rounded-full object-cover border-2 border-blue-500">
+
+                            <div class="hidden sm:block">
+
+                                <h3
+                                    class="font-semibold">
+
+                                    Admin
+
+                                </h3>
+
+                                <p
+                                    class="text-xs text-slate-400">
+
+                                    Super Admin
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </header>
+
+                <!-- =====================================
+        Dashboard Section Start
+====================================== -->
+
+                <section
+                    id="dashboard-section"
+                    class="space-y-6">
+                    <!-- ===========================
+            Dashboard Cards
+    ============================ -->
+
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+
+                        <!-- Total Students -->
+
+                        <div
+                            class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition">
+
+                            <div
+                                class="flex items-center justify-between">
+
+                                <div>
+
+                                    <p
+                                        class="text-sm text-slate-400">
+
+                                        Total Students
+
+                                    </p>
+
+                                    <h2
+                                        id="total-students"
+                                        class="text-4xl font-bold mt-2">
+
+                                        0
+
+                                    </h2>
+
+                                    <span
+                                        class="text-xs text-emerald-400">
+
+                                        Registered Students
+
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    class="w-14 h-14 rounded-xl bg-blue-600/10 flex items-center justify-center">
+
+                                    <i
+                                        data-lucide="users"
+                                        class="w-7 h-7 text-blue-500">
+                                    </i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Total Quizzes -->
+
+                        <div
+                            class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition">
+
+                            <div
+                                class="flex items-center justify-between">
+
+                                <div>
+
+                                    <p
+                                        class="text-sm text-slate-400">
+
+                                        Total Quizzes
+
+                                    </p>
+
+                                    <h2
+                                        id="total-quizzes"
+                                        class="text-4xl font-bold mt-2">
+
+                                        0
+
+                                    </h2>
+
+                                    <span
+                                        class="text-xs text-yellow-400">
+
+                                        Available Quizzes
+
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    class="w-14 h-14 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+
+                                    <i
+                                        data-lucide="help-circle"
+                                        class="w-7 h-7 text-yellow-400">
+                                    </i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Total Results -->
+
+                        <div
+                            class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition">
+
+                            <div
+                                class="flex items-center justify-between">
+
+                                <div>
+
+                                    <p
+                                        class="text-sm text-slate-400">
+
+                                        Total Results
+
+                                    </p>
+
+                                    <h2
+                                        id="total-results"
+                                        class="text-4xl font-bold mt-2">
+
+                                        0
+
+                                    </h2>
+
+                                    <span
+                                        class="text-xs text-green-400">
+
+                                        Published Results
+
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    class="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center">
+
+                                    <i
+                                        data-lucide="award"
+                                        class="w-7 h-7 text-green-400">
+                                    </i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Average Score -->
+
+                        <div
+                            class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition">
+
+                            <div
+                                class="flex items-center justify-between">
+
+                                <div>
+
+                                    <p
+                                        class="text-sm text-slate-400">
+
+                                        Average Score
+
+                                    </p>
+
+                                    <h2
+                                        id="average-score"
+                                        class="text-4xl font-bold mt-2">
+
+                                        0%
+
+                                    </h2>
+
+                                    <span
+                                        class="text-xs text-cyan-400">
+
+                                        Overall Performance
+
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    class="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center">
+
+                                    <i
+                                        data-lucide="bar-chart-3"
+                                        class="w-7 h-7 text-cyan-400">
+                                    </i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Dashboard Cards End -->
+
+                    <!-- =====================================
+        Dashboard Content
+====================================== -->
+
+                    <div
+                        class="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-8">
+
+                        <!-- ==========================
+            Students Table
+    =========================== -->
+
+                        <div
+                            class="xl:col-span-2 rounded-2xl bg-slate-900 border border-blue-500/20 p-6">
+
+                            <!-- Header -->
+
+                            <div
+                                class="flex items-center justify-between mb-6">
+
+                                <div>
+
+                                    <h2
+                                        class="text-xl font-semibold">
+
+                                        Recent Students
+
+                                    </h2>
+
+                                    <p
+                                        class="text-sm text-slate-400 mt-1">
+
+                                        Total Students :
+                                        <span
+                                            id="students-count"
+                                            class="text-blue-400 font-semibold">
+
+                                            0
+
+                                        </span>
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Table -->
+
+                            <div
+                                class="overflow-x-auto">
+
+                                <table
+                                    class="w-full">
+
+                                    <thead>
+
+                                        <tr
+                                            class="border-b border-slate-700 text-slate-400">
+
+                                            <th
+                                                class="text-left py-3">
+
+                                                Student
+
+                                            </th>
+
+                                            <th
+                                                class="text-left py-3">
+
+                                                Email
+
+                                            </th>
+
+                                            <th
+                                                class="text-left py-3">
+
+                                                Status
+
+                                            </th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody
+                                        id="students-table">
+
+                                        <!-- Dynamic Data -->
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ==========================
+            Students Overview
+    =========================== -->
+
+                        <div
+                            class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6">
+
+                            <h2
+                                class="text-xl font-semibold mb-6">
+
+                                Students Overview
+
+                            </h2>
+
+                            <!-- Active -->
+
+                            <div
+                                class="flex justify-between items-center py-4 border-b border-slate-800">
+
+                                <div>
+
+                                    <h3
+                                        class="font-medium">
+
+                                        Active Students
+
+                                    </h3>
+
+                                    <p
+                                        class="text-sm text-slate-400">
+
+                                        Currently Active
+
+                                    </p>
+
+                                </div>
+
+                                <span
+                                    id="active-students"
+                                    class="text-emerald-400 text-2xl font-bold">
+
+                                    0
+
+                                </span>
+
+                            </div>
+
+                            <!-- Inactive -->
+
+                            <div
+                                class="flex justify-between items-center py-4 border-b border-slate-800">
+
+                                <div>
+
+                                    <h3
+                                        class="font-medium">
+
+                                        Inactive Students
+
+                                    </h3>
+
+                                    <p
+                                        class="text-sm text-slate-400">
+
+                                        Not Active
+
+                                    </p>
+
+                                </div>
+
+                                <span
+                                    id="inactive-students"
+                                    class="text-red-400 text-2xl font-bold">
+
+                                    0
+
+                                </span>
+
+                            </div>
+
+                            <!-- Registered -->
+
+                            <div
+                                class="flex justify-between items-center py-4">
+
+                                <div>
+
+                                    <h3
+                                        class="font-medium">
+
+                                        Registered
+
+                                    </h3>
+
+                                    <p
+                                        class="text-sm text-slate-400">
+
+                                        Total Accounts
+
+                                    </p>
+
+                                </div>
+
+                                <span
+                                    id="registered-students"
+                                    class="text-blue-400 text-2xl font-bold">
+
+                                    0
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+                <!-- Dashboard Section End -->
+
+                <!-- ===================================================
+                    Students Section
+=================================================== -->
+
+                <section id="students-section" class="hidden space-y-6">
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <h2 class="text-3xl font-bold">
+                                Students
+                            </h2>
+
+                            <p class="text-slate-400">
+                                Manage all registered students.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6">
+
+                        <div class="overflow-x-auto">
+
+                            <table class="w-full">
+
+                                <thead>
+
+                                    <tr
+                                        class="border-b border-slate-700 text-slate-400">
+
+                                        <th class="text-left py-3">Student</th>
+                                        <th class="text-left py-3">Email</th>
+                                        <th class="text-left py-3">Status</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="students-table-page">
+
+                                    <!-- JS Dynamic -->
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- ===================================================
+                    Quizzes Section
+=================================================== -->
+
+                <section
+                    id="quizzes-section"
+                    class="hidden space-y-6">
+
+                    <div
+                        class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6">
+                        <h2 class="text-3xl font-bold mb-4">Quiz Management</h2>
+                        <p class="text-slate-400 mb-6">Create quizzes with
+                            multiple choice options and publish them to
+                            students.</p>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div>
+                                    <label
+                                        class="block text-sm text-slate-400 mb-2">Quiz
+                                        Title</label>
+                                    <input id="quiz-title"
+                                        class="w-full rounded-xl border border-blue-500/20 bg-slate-800 px-4 py-3 outline-none focus:border-blue-500"
+                                        placeholder="Quiz title" />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm text-slate-400 mb-2">Description</label>
+                                    <textarea id="quiz-description" rows="3"
+                                        class="w-full rounded-xl border border-blue-500/20 bg-slate-800 px-4 py-3 outline-none focus:border-blue-500"
+                                        placeholder="Short description"></textarea>
+                                </div>
+                                <div id="quiz-questions-container"
+                                    class="space-y-3"></div>
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button id="add-question-btn" type="button"
+                                        class="rounded-xl border border-blue-500/30 px-4 py-3 font-semibold text-blue-400 hover:bg-blue-500/10 cursor-pointer">Add
+                                        Question</button>
+                                    <button id="create-new-quiz-btn"
+                                        type="button"
+                                        class="rounded-xl border border-slate-700 px-4 py-3 font-semibold text-slate-300 hover:bg-slate-800 cursor-pointer">Create
+                                        New Quiz</button>
+                                </div>
+                                <button id="save-quiz-btn"
+                                    class="mt-4 rounded-xl bg-blue-600 px-4 py-3 font-semibold hover:bg-blue-500 cursor-pointer">Save
+                                    Quiz</button>
+                            </div>
+                            <div id="quiz-preview"
+                                class="rounded-2xl border border-slate-800 bg-slate-800/60 p-4"></div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6">
+                        <h3 class="text-xl font-semibold mb-4">Published
+                            Quizzes</h3>
+                        <div id="admin-quiz-list" class="space-y-3"></div>
+                    </div>
+
+                </section>
+
+                <!-- ===================================================
+                    Results Section
+=================================================== -->
+
+                <section
+                    id="results-section"
+                    class="hidden">
+
+                    <div
+                        class="rounded-2xl bg-slate-900 border border-blue-500/20 p-6">
+                        <h2 class="text-3xl font-bold mb-4">Results Panel</h2>
+                        <p class="text-slate-400 mb-6">Review student quiz
+                            attempts and scores.</p>
+                        <div id="admin-results-list" class="space-y-3"></div>
+                    </div>
+
+                </section>
+
+                <!-- ===================================================
+                    Settings Section
+=================================================== -->
+
+                <section
+                    id="settings-section"
+                    class="hidden">
+
+                    <div
+                        class="rounded-2xl bg-slate-900 border border-blue-500/20 p-8 text-center">
+
+                        <i
+                            data-lucide="settings"
+                            class="w-16 h-16 text-yellow-500 mx-auto mb-5">
+                        </i>
+
+                        <h2 class="text-3xl font-bold">
+
+                            Settings
+
+                        </h2>
+
+                        <p class="text-slate-400 mt-2">
+
+                            Dashboard Settings Panel
+
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+            <script src="dashboard.js"></script>
+
+        </body>
+    </html>

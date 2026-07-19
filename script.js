@@ -45,6 +45,45 @@ if (!admin) {
 }
 
 // ===============================
+// Logout Helper
+// ===============================
+
+let loginGuardHandler = null;
+
+function markLoggedOut() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("authRole");
+}
+
+function setupLoginGuard() {
+    if (localStorage.getItem("isLoggedIn") === "true") {
+        return;
+    }
+
+    history.replaceState({ page: "login" }, "", window.location.href);
+
+    if (loginGuardHandler) {
+        window.removeEventListener("popstate", loginGuardHandler);
+    }
+
+    loginGuardHandler = () => {
+        alert("Please login first");
+        history.pushState({ page: "login" }, "", window.location.href);
+    };
+
+    window.addEventListener("popstate", loginGuardHandler);
+}
+
+function stopLoginGuard() {
+    if (loginGuardHandler) {
+        window.removeEventListener("popstate", loginGuardHandler);
+        loginGuardHandler = null;
+    }
+}
+
+setupLoginGuard();
+
+// ===============================
 // Form Switching
 // ===============================
 
@@ -145,6 +184,9 @@ function signinForm(event) {
         admin.email === signinEmail.value &&
         admin.password === signinPassword.value
     ) {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("authRole", "admin");
+        stopLoginGuard();
         alert("Welcome Admin");
         window.location.href = "./Admin/dashboard.html";
         return;
@@ -156,8 +198,15 @@ function signinForm(event) {
     );
 
     if (isUser) {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("authRole", "student");
+        localStorage.setItem("currentStudentEmail", signinEmail.value);
+        stopLoginGuard();
         alert("Login Successful");
+        window.location.href = "./Student/dashboard.html";
+        return;
     } else {
+        markLoggedOut();
         alert("Invalid Email or Password");
     }
 

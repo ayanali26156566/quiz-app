@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Dashboard</title>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet">
+    </head>
+    <body class="bg-slate-950 text-white font-[Inter] min-h-screen">
+        <div
+            class="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.15),_transparent_35%)]">
+            <div class="flex min-h-screen">
+                <aside
+                    class="hidden lg:flex w-64 shrink-0 flex-col justify-between border-r border-blue-500/20 bg-[#090d16] p-6">
+                    <div>
+                        <div class="mb-10 flex items-center gap-3">
+                            <div
+                                class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-500/40">
+                                <i data-lucide="graduation-cap"
+                                    class="h-7 w-7 text-white"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold">EduPanel</h1>
+                                <p class="text-xs text-slate-400">Student
+                                    Panel</p>
+                            </div>
+                        </div>
+
+                        <nav class="space-y-2">
+                            <a href="#" data-section="dashboard-section"
+                                class="sidebar-link sidebar-active flex items-center gap-3 rounded-xl border-l-4 border-blue-500 bg-blue-600/15 px-4 py-3 text-white shadow-lg shadow-blue-500/20">
+                                <i data-lucide="layout-dashboard"
+                                    class="h-5 w-5 text-blue-400"></i>
+                                <span class="font-medium">Dashboard</span>
+                            </a>
+                            <a href="#" data-section="quizzes-section"
+                                class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 transition hover:bg-slate-800 hover:text-white">
+                                <i data-lucide="help-circle"
+                                    class="h-5 w-5"></i>
+                                <span>Quizzes</span>
+                            </a>
+                            <a href="#" data-section="results-section"
+                                class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 transition hover:bg-slate-800 hover:text-white">
+                                <i data-lucide="bar-chart-2"
+                                    class="h-5 w-5"></i>
+                                <span>Results</span>
+                            </a>
+                            <a href="#" data-section="settings-section"
+                                class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 transition hover:bg-slate-800 hover:text-white">
+                                <i data-lucide="settings" class="h-5 w-5"></i>
+                                <span>Settings</span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="space-y-4">
+                        <a href="../index.html?form=login"
+                            onclick="localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authRole'); localStorage.removeItem('currentStudentEmail');"
+                            class="flex items-center gap-3 rounded-xl border border-transparent px-4 py-3 text-red-400 transition hover:bg-red-500/10">
+                            <i data-lucide="log-out" class="h-5 w-5"></i>
+                            <span class="font-medium">Logout</span>
+                        </a>
+
+                        <div
+                            class="flex items-center gap-3 rounded-xl border border-blue-500/20 bg-slate-900 p-4">
+                            <img id="sidebar-avatar"
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                class="h-11 w-11 rounded-full object-cover" />
+                            <div>
+                                <h3 id="sidebar-name"
+                                    class="text-sm font-semibold">Student</h3>
+                                <p class="text-xs text-slate-400">Learner</p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <div id="mobile-sidebar"
+                    class="fixed inset-0 z-50 hidden lg:hidden">
+                    <div id="sidebar-backdrop"
+                        class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+                    <aside
+                        class="relative z-10 flex h-full w-72 flex-col justify-between border-r border-blue-500/20 bg-[#090d16] p-6">
+                        <button id="close-sidebar-btn"
+                            class="absolute right-5 top-5 text-slate-400 transition hover:text-white">
+                            <i data-lucide="x" class="h-6 w-6"></i>
+                        </button>
+                        <div>
+                            <div class="mb-10 flex items-center gap-3">
+                                <div
+                                    class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-500/40">
+                                    <i data-lucide="graduation-cap"
+                                        class="h-7 w-7 text-white"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-bold">EduPanel</h2>
+                                    <p class="text-xs text-slate-400">Student
+                                        Panel</p>
+                                </div>
+                            </div>
+
+                            <nav class="space-y-2">
+                                <a href="#" data-section="dashboard-section"
+                                    class="sidebar-link sidebar-active flex items-center gap-3 rounded-xl border-l-4 border-blue-500 bg-blue-600/15 px-4 py-3 text-white shadow-lg shadow-blue-500/20">
+                                    <i data-lucide="layout-dashboard"
+                                        class="h-5 w-5 text-blue-400"></i>
+                                    <span class="font-medium">Dashboard</span>
+                                </a>
+                                <a href="#" data-section="quizzes-section"
+                                    class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 transition hover:bg-slate-800 hover:text-white">
+                                    <i data-lucide="help-circle"
+                                        class="h-5 w-5"></i>
+                                    <span>Quizzes</span>
+                                </a>
+                                <a href="#" data-section="results-section"
+                                    class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 transition hover:bg-slate-800 hover:text-white">
+                                    <i data-lucide="bar-chart-2"
+                                        class="h-5 w-5"></i>
+                                    <span>Results</span>
+                                </a>
+                                <a href="#" data-section="settings-section"
+                                    class="sidebar-link flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400 transition hover:bg-slate-800 hover:text-white">
+                                    <i data-lucide="settings"
+                                        class="h-5 w-5"></i>
+                                    <span>Settings</span>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <a href="../index.html?form=login"
+                            onclick="localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authRole'); localStorage.removeItem('currentStudentEmail');"
+                            class="flex items-center gap-3 rounded-xl border border-transparent px-4 py-3 text-red-400 transition hover:bg-red-500/10">
+                            <i data-lucide="log-out" class="h-5 w-5"></i>
+                            <span class="font-medium">Logout</span>
+                        </a>
+                    </aside>
+                </div>
+
+                <main class="flex-1 overflow-y-auto">
+                    <header
+                        class="border-b border-blue-500/20 bg-slate-900/70 backdrop-blur">
+                        <div
+                            class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+                            <div class="flex items-center gap-4">
+                                <button id="hamburger-btn"
+                                    class="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-500/20 bg-slate-900 transition hover:bg-slate-800 lg:hidden">
+                                    <i data-lucide="menu" class="h-6 w-6"></i>
+                                </button>
+                                <div>
+                                    <h1 class="text-2xl font-bold">Student
+                                        Dashboard</h1>
+                                    <p class="text-sm text-slate-400">Manage
+                                        your learning journey</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="hidden items-center gap-2 rounded-xl border border-blue-500/20 bg-slate-900 px-3 py-2 sm:flex">
+                                    <i data-lucide="user"
+                                        class="h-4 w-4 text-blue-400"></i>
+                                    <span id="header-profile-name"
+                                        class="text-sm font-medium">Student</span>
+                                </div>
+                                <a href="../index.html?form=login"
+                                    onclick="localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authRole'); localStorage.removeItem('currentStudentEmail');"
+                                    class="rounded-xl border border-red-500/30 px-4 py-2 text-red-400 transition hover:bg-red-500/10">Logout</a>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="mx-auto max-w-7xl space-y-6 px-4 py-6">
+                        <section id="dashboard-section" class="space-y-6">
+                            <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+                                <div
+                                    class="rounded-3xl border border-blue-500/20 bg-slate-900 p-6 shadow-xl shadow-blue-500/10">
+                                    <div id="profile-card"
+                                        class="flex items-center gap-4"></div>
+                                </div>
+                                <div
+                                    class="rounded-3xl border border-blue-500/20 bg-slate-900 p-6 shadow-xl shadow-blue-500/10">
+                                    <div
+                                        class="mb-4 flex items-center justify-between">
+                                        <h2
+                                            class="text-xl font-semibold">Overview</h2>
+                                        <span
+                                            class="text-sm text-slate-400">Performance</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div
+                                            class="rounded-2xl bg-slate-800 p-4">
+                                            <p
+                                                class="text-sm text-slate-400">Available
+                                                Quizzes</p>
+                                            <p id="active-quizzes"
+                                                class="text-2xl font-bold text-emerald-400">0</p>
+                                        </div>
+                                        <div
+                                            class="rounded-2xl bg-slate-800 p-4">
+                                            <p
+                                                class="text-sm text-slate-400">Completed
+                                                Quizzes</p>
+                                            <p id="completed-quizzes"
+                                                class="text-2xl font-bold text-blue-400">0</p>
+                                        </div>
+                                        <div
+                                            class="rounded-2xl bg-slate-800 p-4">
+                                            <p
+                                                class="text-sm text-slate-400">Average
+                                                Score</p>
+                                            <p id="student-score"
+                                                class="text-2xl font-bold text-yellow-400">0%</p>
+                                        </div>
+                                        <div
+                                            class="rounded-2xl bg-slate-800 p-4">
+                                            <p
+                                                class="text-sm text-slate-400">Best
+                                                Score</p>
+                                            <p id="best-score"
+                                                class="text-2xl font-bold text-cyan-400">0%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+                                <div
+                                    class="rounded-3xl border border-blue-500/20 bg-slate-900 p-6 shadow-xl shadow-blue-500/10">
+                                    <div
+                                        class="mb-4 flex items-center justify-between">
+                                        <div>
+                                            <h2
+                                                class="text-xl font-semibold">Available
+                                                Quizzes</h2>
+                                            <p
+                                                class="text-sm text-slate-400">Pick
+                                                a quiz and start practicing</p>
+                                        </div>
+                                    </div>
+                                    <div id="quiz-list" class="space-y-3"></div>
+                                </div>
+
+                                <div
+                                    class="rounded-3xl border border-blue-500/20 bg-slate-900 p-6 shadow-xl shadow-blue-500/10">
+                                    <div
+                                        class="mb-4 flex items-center justify-between">
+                                        <div>
+                                            <h2
+                                                class="text-xl font-semibold">Recent
+                                                Results</h2>
+                                            <p
+                                                class="text-sm text-slate-400">Your
+                                                latest attempts</p>
+                                        </div>
+                                    </div>
+                                    <div id="results-list"
+                                        class="space-y-3"></div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="quizzes-section" class="hidden">
+                            <div
+                                class="rounded-3xl border border-blue-500/20 bg-slate-900 p-6 shadow-xl shadow-blue-500/10">
+                                <div
+                                    class="mb-4 flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-xl font-semibold">All
+                                            Quizzes</h2>
+                                        <p class="text-sm text-slate-400">Browse
+                                            every quiz available to you</p>
+                                    </div>
+                                </div>
+                                <div id="all-quiz-list" class="space-y-3"></div>
+                            </div>
+                        </section>
+
+                        <section id="results-section" class="hidden">
+                            <div
+                                class="rounded-3xl border border-blue-500/20 bg-slate-900 p-6 shadow-xl shadow-blue-500/10">
+                                <div
+                                    class="mb-4 flex items-center justify-between">
+                                    <div>
+                                        <h2 class="text-xl font-semibold">All
+                                            Results</h2>
+                                        <p class="text-sm text-slate-400">See
+                                            every quiz result you have
+                                            earned</p>
+                                    </div>
+                                </div>
+                                <div id="all-results-list"
+                                    class="space-y-3"></div>
+                            </div>
+                        </section>
+
+                        <section id="settings-section" class="hidden">
+                            <div
+                                class="rounded-3xl border border-blue-500/20 bg-slate-900 p-6 shadow-xl shadow-blue-500/10">
+                                <div class="mb-6 flex items-center gap-4">
+                                    <img id="settings-avatar-preview"
+                                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+                                        class="h-16 w-16 rounded-full object-cover border-2 border-blue-500" />
+                                    <div>
+                                        <h2
+                                            class="text-xl font-semibold">Profile
+                                            Settings</h2>
+                                        <p class="text-sm text-slate-400">Update
+                                            your username and profile
+                                            picture</p>
+                                    </div>
+                                </div>
+
+                                <form id="settings-form"
+                                    class="grid gap-4 md:grid-cols-2">
+                                    <div>
+                                        <label
+                                            class="mb-2 block text-sm text-slate-400">Full
+                                            Name</label>
+                                        <input id="settings-name" type="text"
+                                            class="w-full rounded-xl border border-blue-500/20 bg-slate-800 px-4 py-3 outline-none focus:border-blue-500"
+                                            placeholder="Enter your name" />
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="mb-2 block text-sm text-slate-400">Username</label>
+                                        <input id="settings-username"
+                                            type="text"
+                                            class="w-full rounded-xl border border-blue-500/20 bg-slate-800 px-4 py-3 outline-none focus:border-blue-500"
+                                            placeholder="Enter username" />
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label
+                                            class="mb-2 block text-sm text-slate-400">Profile
+                                            Image</label>
+                                        <div id="image-dropzone"
+                                            class="rounded-2xl border border-dashed border-blue-500/30 bg-slate-800/70 p-4 transition">
+                                            <input id="settings-image"
+                                                type="file" accept="image/*"
+                                                class="block w-full text-sm text-slate-400 file:mr-4 file:rounded-xl file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-500" />
+                                            <p
+                                                class="mt-3 text-sm text-slate-400">Drag
+                                                and drop an image here or browse
+                                                from your device.</p>
+                                        </div>
+                                    </div>
+                                    <div class="md:col-span-2 flex justify-end">
+                                        <button type="submit"
+                                            class="rounded-xl bg-blue-600 px-5 py-3 font-semibold transition hover:bg-blue-500">Save
+                                            Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script src="student-dashboard.js"></script>
+    </body>
+</html>
